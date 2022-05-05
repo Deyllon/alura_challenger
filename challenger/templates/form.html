@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% include 'partials/navegacao.html' %}
+        <main class="main">
+            <h1 class="titulo">IMPORTAR TRANSAÇÕES</h1>
+            <form action="{% url 'index' %}" method="POST" class="form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="div">
+                    <label class="label_input" for="file">Choose File</label>
+                    <p class="titulo_input" >No file chosen</p>
+                </div>
+                <input class="file" type="file" name="file" id="file" accept=".csv">
+                <p class="paragrafo">Selecione o arquivo para realizar o upload</p>
+                <div class="div_button">
+                    <button class="enviar" type="submit">Importar</button>
+                </div>
+            </form>
+            <h2 class="titulo_importacoes"> IMPORTAÇÕES REALIZADAS</h2>
+            <section class="section">
+                <div>
+                    <h3 class="titulo_datas_importacoes">DATA TRANSAÇÕES</h3>
+                    {% for transacao in transacoes %}
+                        <p class="datas_importacoes">{{transacao}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3 class="titulo_datas_importacoes">DATA IMPORTAÇÃO</h3>
+                    {% for horario in horarios %}
+                        <p class="datas_importacoes">{{horario}}</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+{% endblock %}
+
+

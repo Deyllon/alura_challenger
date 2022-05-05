@@ -1,0 +1,17 @@
+.header{
+    width: 100%;
+    position: fixed;
+    background-color: black;
+    height: 2rem;
+}
+.lista{
+    display: flex;
+}
+.lista_item{
+    padding: 0.5rem 0;
+    margin: 0 1rem;
+}
+.ancoragem_item{
+    text-decoration: none;
+    color: white;
+}

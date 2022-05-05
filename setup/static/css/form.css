@@ -1,0 +1,80 @@
+.titulo{
+    font-size: 2rem;
+    text-align: center;
+    margin: 3rem 0rem;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 25%;
+}
+.file{
+    display: none;
+}
+.div{
+    display: flex;
+    width: 100%;
+}
+.div_button{
+    width: 100%;
+}
+.label_input{
+    text-align: center;
+    border: 1px solid #D3D3D3;
+    background-color: #D3D3D3;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px ;
+    height: 1.5rem;
+    padding-top: 0.5rem;
+    font-weight: bold;
+    width: 20%;
+}
+.titulo_input{
+    padding-left: 1rem;
+    border: 1px solid #D3D3D3;
+    width: 80%;
+    padding-top: 0.5rem;
+    font-weight: bold;
+    border-top-right-radius:5px ;
+    border-bottom-right-radius:5px ;
+}
+.paragrafo{
+    width: 100%;
+    margin-top: 0.5rem;
+    color: #D3D3D3;
+}
+.enviar{
+    margin-right: 34rem;
+    width: 6rem;
+    margin-top: 1rem;
+    background-color: #0000FF;
+    border: 0px solid;
+    border-radius: 5px;
+    height: 2rem;
+    color: white;
+    font-weight: bold;
+}
+.section{
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 25%;
+}
+.titulo_importacoes{
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #D3D3D3;
+    margin-top: 0.5rem;
+    margin: 0.5rem 25%;
+    font-weight: bold;
+}
+.titulo_datas_importacoes{
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid ;
+    font-weight: bold;
+}
+.datas_importacoes{
+    padding: 0.5rem 0;
+    background-color: #D3D3D3;
+}

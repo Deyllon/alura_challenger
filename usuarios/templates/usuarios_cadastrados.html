@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    
+        {% include 'partials/navegacao.html' %}
+        <main class="main">
+            <h1 class="texto_cadastro">USUARIO CADASTRADOS</h1>
+            <section class="form">
+                <a class="ancoragem_botao" href="">Novo</a>
+                <div class="tabela_usuarios">
+                    <h2 class="tabela_cabecalho">ID</h2>
+                    <h2 class="tabela_cabecalho">NOME</h2>
+                    <h2 class="tabela_cabecalho">EMAIL</h2>
+                    <h2 class="tabela_cabecalho">OPÇÕES</h2>
+                    {% for usuario in usuarios %}
+                        <p class="tabela_itens">{{usuario.id}}</p>
+                        <p class="tabela_itens">{{usuario.nome}}</p>
+                        <p class="tabela_itens">{{usuario.email}}</p>
+                        <div class="tabela_itens">
+                            <a class="ancoragem_botao_tabela_itens" href="{% url 'editar_usuarios' usuario.id %}">Editar</a>
+                            <a class="ancoragem_botao_tabela_itens--vermelho" href="">Remover</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    
+{% endblock %}

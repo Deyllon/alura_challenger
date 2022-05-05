@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="texto_cadastro">CADASTRO DE USUARIO</h1>
+    <form class="formulario_cadastro" action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+        <label class="label_cadastro" for="nome">Nome</label>
+        <input class="input_cadastro" type="text" name="nome" id="nome">
+        <label class="label_cadastro" for="email">Email</label>
+        <input class="input_cadastro" type="text" name="email" id="email">
+        <button class="enviar" type="submit">Cadastrar</button>
+    </form>
+    <div class="div_cadastro">
+        <a class="cadastrar" href="{% url 'login' %}">Login</a>
+    </div>
+{% endblock %}
