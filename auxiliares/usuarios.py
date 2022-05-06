@@ -1,7 +1,12 @@
+from django.core.mail import send_mail
+from django.conf import settings
 import random
 from django.contrib.auth.models import User
 import bcrypt
 from django.shortcuts import get_object_or_404
+
+
+
 
 from usuarios.models import Usuarios
 
@@ -56,3 +61,9 @@ def pegar_usuario(pk):
     usuario = get_object_or_404(Usuarios, pk=pk)
     
     return usuario
+
+def enviar_email(email_enviado, nome, senha):
+    
+    send_mail("Envio da senha de usuario", f"Ola {nome} aqui está a sua senha: {senha}", settings.EMAIL_HOST_USER, [f"{email_enviado}"])
+   
+   

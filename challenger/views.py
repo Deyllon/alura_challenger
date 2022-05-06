@@ -8,26 +8,29 @@ def index(request):
     if request.user.is_authenticated:
     
         transacoes = pegar_transacoes() 
-        horarios = formatar_horarios(transacoes)
-        transacoes = formatar_data(transacoes)
         
-        contexto = {
-            'transacoes': transacoes,
-            'horarios': horarios
-        }
+        if transacoes != None:
+            horarios = formatar_horarios(transacoes)
+            transacoes = formatar_data(transacoes)
         
-        if request.method == "POST":
+            contexto = {
+                'transacoes': transacoes,
+                'horarios': horarios
+            }   
+        
+            if request.method == "POST":
             
-            arquivo = request.FILES['file']
+                arquivo = request.FILES['file']
             
-            if verifica_se_arquivo_esta_vazio(arquivo):
+                if verifica_se_arquivo_esta_vazio(arquivo):
+                    return redirect("index")
+            
+                ler_arquivo_e_salvar_transacao(arquivo,request)
+            
                 return redirect("index")
-            
-            ler_arquivo_e_salvar_transacao(arquivo)
-            
-            return redirect("index")
     
-        return render(request,"form.html", contexto)
+            return render(request,"form.html", contexto)
+        return render(request,"form.html")
     
     return redirect("login")
 

@@ -1,4 +1,4 @@
-from auxiliares.usuarios import gerar_senha, pegar_usuario, pegar_usuarios, salvar_usuario
+from auxiliares.usuarios import enviar_email, gerar_senha, pegar_usuario, pegar_usuarios, salvar_usuario
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from validadores.validar_usuario import validar_email, verifica_se_email_ja_existe
@@ -12,15 +12,19 @@ def cadastro(request):
         nome = request.POST["nome"]
         email = request.POST["email"]
         if not validar_email(email):
+            
             return redirect("cadastro")
         
         if verifica_se_email_ja_existe(email):
+            
             return redirect("cadastro")
         
         senha = gerar_senha()
         
+        enviar_email(email, nome, senha)
         
         salvar_usuario(nome, email, senha)
+        print(senha)
         
         return redirect("login")
     

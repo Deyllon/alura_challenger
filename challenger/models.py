@@ -1,7 +1,7 @@
 from datetime import datetime
 from operator import mod
 from django.db import models
-
+from usuarios.models import Usuarios
 
 class Transacao(models.Model):
     banco_emissor = models.TextField(max_length=200)

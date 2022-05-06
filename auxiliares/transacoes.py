@@ -9,10 +9,12 @@ def pegar_linhas_arquivos(arquivo):
     return [x.decode('utf8').strip() for x in arquivo.readlines()]
 
 def pegar_transacoes():
+    if Transacao.objects.exists():
+        transacoes = Transacao.objects.all()
     
-    transacoes = Transacao.objects.all()
+        return transacoes
     
-    return transacoes
+    return None
 
 def formatar_horarios(transacoes):
     
@@ -49,7 +51,7 @@ def pegar_data_transacao(dia_da_transacao):
     
     return dia_da_transacao.strip(" ")
 
-def salvar_transacao(linhas, data_primeira_linha):
+def salvar_transacao(linhas, data_primeira_linha, request):
     
     for linha in linhas:
         transacao = linha.split(",")
@@ -78,7 +80,7 @@ def salvar_transacao(linhas, data_primeira_linha):
             
             transacao.save()
             
-def ler_arquivo_e_salvar_transacao(arquivo):
+def ler_arquivo_e_salvar_transacao(arquivo,request):
     
     linhas = pegar_linhas_arquivos(arquivo)
     data_primeira_linha = pegar_data_primeira_linha(linhas)
@@ -87,4 +89,4 @@ def ler_arquivo_e_salvar_transacao(arquivo):
     if verifica_se_e_vazio(db_transacoes):
         return
     
-    salvar_transacao(linhas, data_primeira_linha)
+    salvar_transacao(linhas, data_primeira_linha,request)
