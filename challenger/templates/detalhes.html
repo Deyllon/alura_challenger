@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'partials/navegacao.html' %}
+    <main class="main">
+        <h2 class="titulo">DETALHES DA IMPORTAÇÃO</h2>
+        <section class="section_arquivo">
+            <p class="paragrafo_arquivo">Importado em </p>
+            <p class="paragrafo_arquivo_detalhes">{{horario}}</p>
+            <p class="paragrafo_arquivo">Importado por </p>
+            <p class="paragrafo_arquivo_detalhes">{{arquivo.nome_usuario}}</p>
+            <p class="paragrafo_arquivo">Data transações</p>
+            <p class="paragrafo_arquivo_detalhes">{{data}}</p>
+        </section>
+        <h1 class="titulo">TRANSAÇÕES IMPORTADAS</h1>
+        <section class="section_detalhes">
+            <section class="section_origem_destino">
+                <h3 class="titulo_tabelas titulo_origem_destino">ORIGEM</h3>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">BANCO</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.banco_emissor}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">AGÊNCIA</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.agencia_banco_emissor}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">CONTA</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.numero_banco_emissor}}</p>
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="section_origem_destino">
+                <h3 class="titulo_tabelas titulo_origem_destino">Destino</h3>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">BANCO</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.banco_destinatario}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">AGÊNCIA</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.agencia_banco_destinatario}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h4 class="titulo_tabelas detalhes">CONTA</h4>
+                    {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">{{transacao.numero_banco_destinatario}}</p>
+                    {% endfor %}
+                </div>
+            </section>
+            <section>
+                <h3 class="titulo_tabelas titulo_valor">Valor</h3>
+                {% for transacao in transacoes %}
+                        <p class="paragrafo_detalhes">R$ {{transacao.valor_transacao}}</p>
+                    {% endfor %}
+            </section>
+            
+        </section>
+    </main>
+{% endblock %}

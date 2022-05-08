@@ -1,6 +1,7 @@
 from auxiliares.usuarios import enviar_email, gerar_senha, pegar_usuario, pegar_usuarios, salvar_usuario
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
+from usuarios.models import Usuarios
 from validadores.validar_usuario import validar_email, verifica_se_email_ja_existe
 from django.contrib import auth
 
@@ -35,7 +36,9 @@ def login(request):
     if request.method == "POST":
         email = request.POST["email"]
         senha = request.POST["senha"]
-
+        usuario = get_object_or_404(Usuarios, email=email)
+        if usuario.desativado == True:
+            return redirect ("login")
         username = User.objects.filter(email= email).values_list('username', flat=True).get()
         
         login = auth.authenticate(request, username= username, password=senha)
@@ -80,3 +83,15 @@ def logout(request):
     
     auth.logout(request)
     return redirect('index')
+
+def deletar(request, email):
+    
+    usuario = get_object_or_404(Usuarios, email= email)
+    
+    
+    usuario.desativado = True
+        
+    usuario.save(update_fields=["desativado"])
+        
+    return redirect("usuarios_cadastrados")
+         

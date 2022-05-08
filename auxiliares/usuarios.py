@@ -42,7 +42,7 @@ def salvar_usuario(nome, email, senha):
         
 def pegar_usuarios(request):
     
-    usuarios = Usuarios.objects.exclude(admin=True)& Usuarios.objects.exclude(user=request.user)
+    usuarios = Usuarios.objects.exclude(admin=True)& Usuarios.objects.exclude(user=request.user) & Usuarios.objects.exclude(desativado= True)
     
     return usuarios
 

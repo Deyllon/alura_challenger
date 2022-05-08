@@ -20,14 +20,20 @@
             <section class="section">
                 <div>
                     <h3 class="titulo_datas_importacoes">DATA TRANSAÇÕES</h3>
-                    {% for transacao in transacoes %}
-                        <p class="datas_importacoes">{{transacao}}</p>
+                    {% for data in datas_transacoes %}
+                        <p class="datas_importacoes">{{data}}</p>
                     {% endfor %}
                 </div>
                 <div>
                     <h3 class="titulo_datas_importacoes">DATA IMPORTAÇÃO</h3>
                     {% for horario in horarios %}
                         <p class="datas_importacoes">{{horario}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3 class="titulo_datas_importacoes">OPÇÕES</h3>
+                    {% for arquivo in arquivos %}
+                    <p class="datas_importacoes"><a class="ancoragem_detalhes"  href="{% url 'detalhes' arquivo.id %}">Detalhar</a></p>
                     {% endfor %}
                 </div>
             </section>

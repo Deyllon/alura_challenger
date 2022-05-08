@@ -9,5 +9,5 @@ class Usuarios(models.Model):
     email = models.TextField(max_length=200)
     admin = models.BooleanField(default=True)
     senha = models.TextField(max_length=100)
-
+    desativado = models.BooleanField(default=False)
 

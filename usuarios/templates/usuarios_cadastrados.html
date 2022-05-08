@@ -18,7 +18,7 @@
                         <p class="tabela_itens">{{usuario.email}}</p>
                         <div class="tabela_itens">
                             <a class="ancoragem_botao_tabela_itens" href="{% url 'editar_usuarios' usuario.id %}">Editar</a>
-                            <a class="ancoragem_botao_tabela_itens--vermelho" href="">Remover</a>
+                            <a class="ancoragem_botao_tabela_itens--vermelho" href="{% url 'deletar' usuario.email %}">Remover</a>
                         </div>
                     {% endfor %}
                 </div>

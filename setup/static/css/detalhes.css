@@ -1,0 +1,57 @@
+.section_arquivo{
+    margin: 0 25%;
+    border: 1px solid #D3D3D3;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+}
+.paragrafo_arquivo{
+    margin: 0.6rem;
+    font-weight: bold;
+}
+.paragrafo_arquivo_detalhes{
+    margin: 0.3rem;
+    border: 1px solid;
+    padding: 0.3rem;
+    background-color: #D3D3D3;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 15rem;
+}
+.section_detalhes{
+    margin: 0rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 90px;
+    border: 1px solid #D3D3D3;
+    border-radius: 3px;
+}
+.section_origem_destino{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+.titulo_tabelas{
+    text-align: center;
+}
+.titulo_origem_destino{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 0.5rem 0;
+    border-right: 1px solid #D3D3D3;
+    border-bottom: 1px solid #D3D3D3;
+}
+.detalhes{
+    padding: 0.3rem 0;
+    border-bottom: 2px solid;
+    border-right: 1px solid #D3D3D3;
+}
+.titulo_valor{
+    border-left: 1px solid #D3D3D3;
+    border-bottom: 2px solid;
+    padding: 1.33rem;
+}
+.paragrafo_detalhes{
+    padding: 0.5rem 0.1rem;
+    background-color: #D3D3D3;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+}

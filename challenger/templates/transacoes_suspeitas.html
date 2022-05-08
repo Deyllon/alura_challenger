@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <form action="{% url 'suspeitas' %}" method="POST">{% csrf_token %}
+        <input type="month" min="2022-01" name="data" id="data">
+        <button type="submit">enviar</button>
+    </form>
+    
+{% endblock %}

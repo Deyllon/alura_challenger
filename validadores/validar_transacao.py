@@ -4,12 +4,11 @@ from  challenger.models import Transacao
 def verificar_se_data_da_transacao_ja_adicionada(data_primeira_linha):
     
     transacao = Transacao.objects.filter(dia_da_transacao = data_primeira_linha).first()
-
-    return True
+    return transacao
     
 def verifica_se_e_vazio(transacoes):
     
-    if transacoes is None:
+    if transacoes != None:
         return True
     
     return False
