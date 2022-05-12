@@ -8,7 +8,7 @@
             <form action="{% url 'index' %}" method="POST" class="form" enctype="multipart/form-data">{% csrf_token %}
                 <div class="div">
                     <label class="label_input" for="file">Choose File</label>
-                    <p class="titulo_input" >No file chosen</p>
+                    <p id="texto_arquivo" class="titulo_input" >No file chosen</p>
                 </div>
                 <input class="file" type="file" name="file" id="file" accept=".csv">
                 <p class="paragrafo">Selecione o arquivo para realizar o upload</p>
@@ -38,6 +38,18 @@
                 </div>
             </section>
         </main>
+        <script>
+            $(".file").change(function (e){
+                const valor_arquivo = $(this).val()
+                texto = document.getElementById("texto_arquivo")
+                if (valor_arquivo === ""){
+                    texto.textContent = "No file chosen"
+                }
+                else{
+                    texto.textContent = valor_arquivo
+                }
+            })
+        </script>
 {% endblock %}
 
 

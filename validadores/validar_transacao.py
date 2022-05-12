@@ -1,4 +1,5 @@
 from  challenger.models import Transacao
+from xml.etree import ElementTree
 
 
 def verificar_se_data_da_transacao_ja_adicionada(data_primeira_linha):

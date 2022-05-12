@@ -1,9 +1,311 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <form action="{% url 'suspeitas' %}" method="POST">{% csrf_token %}
-        <input type="month" min="2022-01" name="data" id="data">
-        <button type="submit">enviar</button>
-    </form>
-    
+    {% include 'partials/navegacao.html' %}
+    <main class="main">
+        <h1 class="titulo">ANÁLISE DE TRANSAÇÕES SUSPEITAS</h1>
+        <form class="formulario_transacoes_suspeitas" action="{% url 'transacoes' %}" method="POST">{% csrf_token %}
+            <label class="label_suspeitas" for="data">Selecione o mês para analisar as transações</label>
+            <input class="input_data" type="month" min="2022-01" name="data" id="data">
+            <button class="botao_suspeitas" type="submit">Realizar análise</button>
+        </form>
+        <h2 class="titulo">TRANSAÇÕES SUSPEITAS</h2>   
+        <section class="section_suspeitas">
+            <div >
+                <h3 class="origem_suspeitas">ORIGEM</h3>
+                <div  class="div_suspeitas">
+                    <div id="transacoes_origens_bancos" class="div_suspeitas_detalhes">
+                        <h4 class="titulos_suspeitas_detalhes">BANCO</h4>
+                    </div>
+                    <div id="transacoes_origens_agencias" class="div_suspeitas_detalhes">
+                        <h4 class="titulos_suspeitas_detalhes">AGÊNCIA</h4>
+                    </div>
+                    <div id="transacoes_origens_contas" class="div_suspeitas_detalhes_contas">
+                        <h4 class="titulos_suspeitas_detalhes titulos_suspeitas_contas">CONTA</h4>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="origem_suspeitas">DESTINO</h3>
+                <div class="div_suspeitas">
+                    <div id="transacoes_destino_bancos" class="div_suspeitas_detalhes">
+                        <h4 class="titulos_suspeitas_detalhes">BANCO</h4>
+                    </div>
+                    <div id="transacoes_destino_agencias" class="div_suspeitas_detalhes">
+                        <h4 class="titulos_suspeitas_detalhes">AGÊNCIA</h4>
+                    </div>
+                    <div id="transacoes_destino_contas" class="div_suspeitas_detalhes_contas">
+                        <h4 class="titulos_suspeitas_detalhes titulos_suspeitas_contas">CONTA</h4>
+                    </div>
+                </div>
+            </div>
+            <div id="transacoes_valor">
+               <h3 class="valor_transacoes_suspeitas">Valor</h3> 
+            </div>
+        </section>
+        <h2 class="titulo">CONTAS SUSPEITAS</h2>
+        <section class="section_contas_suspeitas">
+            <div id="contas_suspeitas_banco">
+                <h3 class="titulo_detalhes_contas_suspeitas">BANCO</h3>
+            </div>
+            <div id="contas_suspeitas_agencia">
+                <h3 class="titulo_detalhes_contas_suspeitas">AGÊNCIA</h3>
+            </div>
+            <div id="contas_suspeitas_conta">
+                <h3 class="titulo_detalhes_contas_suspeitas">CONTA</h3>
+            </div>
+            <div id="contas_suspeitas_valor">
+                <h3 class="titulo_detalhes_contas_suspeitas">VALOR MOVIMENTADO</h3>
+            </div>
+            <div id="contas_suspeitas_tipo">
+                <h3 class="titulo_detalhes_contas_suspeitas">TIPO MOVIMENTAÇÃO</h3>
+            </div>
+        </section>
+        <h2 class="titulo">AGÊNCIAS SUSPEITAS</h2>
+        <section class="section_agencias_suspeitas">
+            <div id="agencias_suspeitas_banco" >
+                <h3 class="titulo_detalhes_contas_suspeitas">BANCO</h3>
+            </div>
+            <div id="agencias_suspeitas_agencia">
+                <h3 class="titulo_detalhes_contas_suspeitas">AGÊNCIA</h3>
+            </div>
+            <div id="agencias_suspeitas_valor">
+                <h3 class="titulo_detalhes_contas_suspeitas">VALOR MOVIMENTADO</h3>
+            </div>
+            <div id="agencias_suspeitas_tipo">
+                <h3 class="titulo_detalhes_contas_suspeitas">TIPO MOVIMENTAÇÃO</h3>
+            </div>
+        </section>
+    </main>
+    <script>
+        $('.formulario_transacoes_suspeitas').submit(function (e){
+            e.preventDefault();
+            const aquivo_id = $(this).find(".input_data").val()
+            
+
+            const url = $(this).attr("action")
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data:{
+                    arquivo: aquivo_id,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(json){
+                    
+                    const transacoes = json["transacoes_suspeitas"]
+                    const div_transacoes_origens_bancos = document.getElementById("transacoes_origens_bancos")
+                    const div_transacoes_origens_agencias = document.getElementById("transacoes_origens_agencias")
+                    const div_transacoes_origens_contas = document.getElementById("transacoes_origens_contas")
+                    const div_transacoes_destino_bancos = document.getElementById("transacoes_destino_bancos")
+                    const div_transacoes_destino_agencias = document.getElementById("transacoes_destino_agencias")
+                    const div_transacoes_destino_contas = document.getElementById("transacoes_destino_contas")
+                    const div_transacoes_valor = document.getElementById("transacoes_valor")
+
+                    const classes = document.querySelectorAll('.valores_detalhes')
+                    
+                    classes.forEach(classe => {
+                        classe.remove();
+                    });
+                        
+
+                    for (x in transacoes){
+                        
+                        var obj = transacoes[x]
+
+                        var b_origem = document.createElement("p")
+                        var a_origem = document.createElement("p")
+                        var c_origem = document.createElement("p")
+                        var b_destino = document.createElement("p")
+                        var a_destino = document.createElement("p")
+                        var c_destino = document.createElement("p")
+                        var valor = document.createElement("p")
+                        
+                        b_origem.classList.add('valores_detalhes')
+                        a_origem.classList.add('valores_detalhes')
+                        c_origem.classList.add('valores_detalhes')
+                        b_destino.classList.add('valores_detalhes')
+                        a_destino.classList.add('valores_detalhes')
+                        c_destino.classList.add('valores_detalhes')
+                        valor.classList.add('valores_detalhes')
+
+                        var banco_origem = document.createTextNode(obj[0])
+                        var agencia_origem = document.createTextNode(obj[1])
+                        var conta_origem =  document.createTextNode(obj[2])
+                        var banco_destino = document.createTextNode(obj[3])
+                        var agencia_destino = document.createTextNode(obj[4])
+                        var conta_destino = document.createTextNode(obj[5])
+                        var valor_texto = document.createTextNode("R$ " + obj[6])
+
+                        b_origem.appendChild(banco_origem)
+                        a_origem.appendChild(agencia_origem)
+                        c_origem.appendChild(conta_origem)
+                        b_destino.appendChild(banco_destino)
+                        a_destino.appendChild(agencia_destino)
+                        c_destino.appendChild(conta_destino)
+                        valor.appendChild(valor_texto)
+
+                        div_transacoes_origens_bancos.appendChild(b_origem)
+                        div_transacoes_origens_agencias.appendChild(a_origem)
+                        div_transacoes_origens_contas.appendChild(c_origem)
+                        div_transacoes_destino_bancos.appendChild(b_destino)
+                        div_transacoes_destino_agencias.appendChild(a_destino)
+                        div_transacoes_destino_contas.appendChild(c_destino)
+                        div_transacoes_valor.appendChild(valor)
+
+                        
+
+                    }   
+                    const contas_saida = json["contas_saida"]
+                    
+                    const div_contas_suspeitas_banco = document.getElementById("contas_suspeitas_banco")
+                    const div_contas_suspeitas_agencia = document.getElementById("contas_suspeitas_agencia")
+                    const div_contas_suspeitas_conta = document.getElementById("contas_suspeitas_conta")
+                    const div_contas_suspeitas_valor = document.getElementById("contas_suspeitas_valor")
+                    const div_contas_suspeitas_tipo = document.getElementById("contas_suspeitas_tipo")
+
+                    for (x in contas_saida ){
+                        
+                        var obj = contas_saida[x]
+
+                        var b = document.createElement("p")
+                        var a = document.createElement("p")
+                        var c = document.createElement("p")
+                        var v = document.createElement("p")
+                        var t = document.createElement("p")
+
+                        b.classList.add('valores_detalhes')
+                        a.classList.add('valores_detalhes')
+                        c.classList.add('valores_detalhes')
+                        v.classList.add('valores_detalhes')
+                        t.classList.add('valores_detalhes')
+
+                        var banco = document.createTextNode(obj[0])
+                        var agencia = document.createTextNode(obj[1])
+                        var conta = document.createTextNode(obj[2])
+                        var valor = document.createTextNode("R$ " +obj[3])
+                        var tipo = document.createTextNode(obj[4])
+
+                        b.appendChild(banco)
+                        a.appendChild(agencia)
+                        c.appendChild(conta)
+                        v.appendChild(valor)
+                        t.appendChild(tipo)
+
+                        div_contas_suspeitas_banco.appendChild(b)
+                        div_contas_suspeitas_agencia.appendChild(a)
+                        div_contas_suspeitas_conta.appendChild(c)
+                        div_contas_suspeitas_valor.appendChild(v)
+                        div_contas_suspeitas_tipo.appendChild(t)
+                    }    
+                    
+                    const contas_entrada = json["contas_entrada"]
+
+                    for (x in contas_entrada ){
+                        
+                        var obj = contas_entrada[x]
+
+                        var b = document.createElement("p")
+                        var a = document.createElement("p")
+                        var c = document.createElement("p")
+                        var v = document.createElement("p")
+                        var t = document.createElement("p")
+
+                        b.classList.add('valores_detalhes')
+                        a.classList.add('valores_detalhes')
+                        c.classList.add('valores_detalhes')
+                        v.classList.add('valores_detalhes')
+                        t.classList.add('valores_detalhes')
+
+                        var banco = document.createTextNode(obj[0])
+                        var agencia = document.createTextNode(obj[1])
+                        var conta = document.createTextNode(obj[2])
+                        var valor = document.createTextNode("R$ " + obj[3])
+                        var tipo = document.createTextNode(obj[4])
+
+                        b.appendChild(banco)
+                        a.appendChild(agencia)
+                        c.appendChild(conta)
+                        v.appendChild(valor)
+                        t.appendChild(tipo)
+
+                        div_contas_suspeitas_banco.appendChild(b)
+                        div_contas_suspeitas_agencia.appendChild(a)
+                        div_contas_suspeitas_conta.appendChild(c)
+                        div_contas_suspeitas_valor.appendChild(v)
+                        div_contas_suspeitas_tipo.appendChild(t)
+                    }
+                    const agencias_saida = json["agencias_saida"]
+
+                    const div_agencias_suspeitas_banco = document.getElementById("agencias_suspeitas_banco")
+                    const div_agencias_suspeitas_agencia = document.getElementById("agencias_suspeitas_agencia")
+                    const div_agencias_suspeitas_valor = document.getElementById("agencias_suspeitas_valor")
+                    const div_agencias_suspeitas_tipo = document.getElementById("agencias_suspeitas_tipo")
+
+                    for (x in agencias_saida){
+                        
+                        var obj = agencias_saida[x]
+
+                        var b = document.createElement("p")
+                        var a = document.createElement("p")
+                        var v = document.createElement("p")
+                        var t = document.createElement("p")
+
+                        b.classList.add('valores_detalhes')
+                        a.classList.add('valores_detalhes')
+                        v.classList.add('valores_detalhes')
+                        t.classList.add('valores_detalhes')
+
+                        var banco = document.createTextNode(obj[0])
+                        var agencia = document.createTextNode(obj[1])
+                        var valor = document.createTextNode("R$ "+ obj[2])
+                        var tipo = document.createTextNode(obj[3])
+
+                        b.appendChild(banco)
+                        a.appendChild(agencia)
+                        v.appendChild(valor)
+                        t.appendChild(tipo)
+
+                        div_agencias_suspeitas_banco.appendChild(b)
+                        div_agencias_suspeitas_agencia.appendChild(a)
+                        div_agencias_suspeitas_valor.appendChild(v)
+                        div_agencias_suspeitas_tipo.appendChild(t)
+
+                    }
+                    const agencias_entrada = json["agencias_entrada"]
+
+                    for (x in agencias_entrada){
+                        
+                        var obj = agencias_entrada[x]
+
+                        var b = document.createElement("p")
+                        var a = document.createElement("p")
+                        var v = document.createElement("p")
+                        var t = document.createElement("p")
+
+                        b.classList.add('valores_detalhes')
+                        a.classList.add('valores_detalhes')
+                        v.classList.add('valores_detalhes')
+                        t.classList.add('valores_detalhes')
+
+                        var banco = document.createTextNode(obj[0])
+                        var agencia = document.createTextNode(obj[1])
+                        var valor = document.createTextNode("R$ " + obj[2])
+                        var tipo = document.createTextNode(obj[3])
+
+                        b.appendChild(banco)
+                        a.appendChild(agencia)
+                        v.appendChild(valor)
+                        t.appendChild(tipo)
+
+                        div_agencias_suspeitas_banco.appendChild(b)
+                        div_agencias_suspeitas_agencia.appendChild(a)
+                        div_agencias_suspeitas_valor.appendChild(v)
+                        div_agencias_suspeitas_tipo.appendChild(t)
+
+                    }
+                }
+            })
+        })
+    </script>
 {% endblock %}

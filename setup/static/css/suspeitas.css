@@ -1,0 +1,83 @@
+.formulario_transacoes_suspeitas{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+}
+.label_suspeitas{
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+.input_data{
+    width: 100%;
+    height: 2rem;
+    padding: 0 0.5rem;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.input_data:hover{
+    cursor: pointer;
+}
+.botao_suspeitas{
+    height: 2rem;
+    margin-top: 1rem;
+    width: 20%;
+    border: 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: #0000FF;
+}
+.botao_suspeitas:hover{
+    cursor: pointer;
+}
+.section_suspeitas{
+    display: grid;
+    grid-template-columns: 2fr 2fr 0.5fr;
+    margin: 0 5%;
+}
+.origem_suspeitas{
+    border: 1px solid;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+.div_suspeitas{
+    display: flex;
+}
+.titulos_suspeitas_detalhes{
+    padding: 0.5rem;
+    border: 1px solid;
+    font-weight: bold;
+}
+.div_suspeitas_detalhes{
+    width: 35%;
+}
+.div_suspeitas_detalhes_contas{
+    width: 30%;
+}
+.valor_transacoes_suspeitas{
+    padding: 1.563rem;
+    border: 1px solid;
+    font-weight: bold;
+}
+.section_contas_suspeitas{
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
+    margin: 0 5%;
+}
+.titulo_detalhes_contas_suspeitas{
+    font-weight: bold;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid;
+}
+.section_agencias_suspeitas{
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr 1fr;
+    margin: 0 5%;
+}
+.valores_detalhes{
+    border: 1px solid;
+    padding: 0.5rem;
+    background-color: #D3D3D3;
+    font-weight: bold;
+}

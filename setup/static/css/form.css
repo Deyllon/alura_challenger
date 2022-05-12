@@ -30,6 +30,9 @@
     font-weight: bold;
     width: 20%;
 }
+.label_input:hover{
+    cursor: pointer;
+}
 .titulo_input{
     padding-left: 1rem;
     border: 1px solid #D3D3D3;
@@ -54,6 +57,9 @@
     height: 2rem;
     color: white;
     font-weight: bold;
+}
+.enviar:hover{
+    cursor: pointer;
 }
 .section{
     display: grid;
