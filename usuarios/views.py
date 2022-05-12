@@ -1,9 +1,10 @@
-from auxiliares.usuarios import enviar_email, gerar_senha, pegar_usuario, pegar_usuarios, salvar_usuario
+from auxiliares.usuarios import editar_usuarios, enviar_email, gerar_senha, pegar_usuario, pegar_usuarios, salvar_usuario
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from usuarios.models import Usuarios
 from validadores.validar_usuario import validar_email, verifica_se_email_ja_existe
-from django.contrib import auth
+from django.contrib import auth, messages
+
 
 
 def cadastro(request):
@@ -14,10 +15,12 @@ def cadastro(request):
         email = request.POST["email"]
         if not validar_email(email):
             
+            messages.error(request," Email não é valido")
             return redirect("cadastro")
         
         if verifica_se_email_ja_existe(email):
             
+            messages.error(request," Email já cadastrado")
             return redirect("cadastro")
         
         senha = gerar_senha()
@@ -27,6 +30,7 @@ def cadastro(request):
         salvar_usuario(nome, email, senha)
         print(senha)
         
+        messages.success(request,"Senha enviada no email")
         return redirect("login")
     
     return render(request, "cadastro.html")
@@ -38,6 +42,8 @@ def login(request):
         senha = request.POST["senha"]
         usuario = get_object_or_404(Usuarios, email=email)
         if usuario.desativado == True:
+            
+            messages.error(request," Usuario desativado")
             return redirect ("login")
         username = User.objects.filter(email= email).values_list('username', flat=True).get()
         
@@ -69,11 +75,10 @@ def editar_usuario(request, pk):
     }
     
     if request.method == "POST":
-        nome = request.POST["nome"]
-        email = request.POST["email"]
-        senha = request.POST["senha"]
+        nome = request.POST["nome_usuario"]
+        email = request.POST["email_usuario"]
              
-        editar_usuario(pk, nome, email, senha)
+        editar_usuarios(pk, nome, email)
         
         return redirect("usuarios_cadastrados")
     

@@ -46,13 +46,12 @@ def pegar_usuarios(request):
     
     return usuarios
 
-def editar_usuario(pk, nome, email, senha):
+def editar_usuarios(pk, nome, email):
     
-    usuario = get_object_or_404(nome, email, senha)
+    usuario = get_object_or_404(Usuarios, pk=pk)
     
     usuario.nome = nome
     usuario.email = email
-    usuario.senha = encriptografar_senha(senha)
     
     usuario.save()
     

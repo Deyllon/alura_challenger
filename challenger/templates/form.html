@@ -13,7 +13,7 @@
                 <input class="file" type="file" name="file" id="file" accept=".csv">
                 <p class="paragrafo">Selecione o arquivo para realizar o upload</p>
                 <div class="div_button">
-                    <button class="enviar" type="submit">Importar</button>
+                    <button id="button" class="enviar" type="submit">Importar</button>
                 </div>
             </form>
             <h2 class="titulo_importacoes"> IMPORTAÇÕES REALIZADAS</h2>
@@ -49,6 +49,22 @@
                     texto.textContent = valor_arquivo
                 }
             })
+        </script>
+        <script>
+            var file = document.getElementById('file');
+            var botao = document.getElementById("button")
+            file.onchange = function(e) {
+            var ext = this.value.match(/\.([^\.]+)$/)[1];
+            switch (ext) {
+                case 'csv':
+                    botao.classList.remove("tira_botao");
+                break;
+                default:
+                    botao.classList.add("tira_botao");
+                    alert("Esse não é um arquivo csv")
+                    this.value = '';
+                }
+            };
         </script>
 {% endblock %}
 

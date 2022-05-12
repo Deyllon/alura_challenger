@@ -28,3 +28,8 @@
     text-align: center;
     margin: 1rem 0;
 }
+.mensagem{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

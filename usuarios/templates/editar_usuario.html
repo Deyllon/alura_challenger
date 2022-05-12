@@ -5,15 +5,15 @@
         {% include 'partials/navegacao.html' %}
         <main class="main">
             <h1 class="texto_cadastro"> Editar usuario</h1>
-            <form class="formulario_grid" action="" method="post">
+            <form class="formulario_grid" action="{% url 'editar_usuarios' usuario.id %}" method="post">{% csrf_token %}
                 <label class="label_editar" for="">Nome Atual</label>
                 <label class="label_editar" for="">Nome</label>
                 <p class="dados_editar" >{{usuario.nome}}</p>
-                <input class="input_editar" type="text" name="" id="">
+                <input class="input_editar" type="text" name="nome_usuario" id="">
                 <label class="label_editar" for="">Email Atual</label>
                 <label class="label_editar" for="">Email</label>
                 <p class="dados_editar" >{{usuario.email}}</p>
-                <input class="input_editar" type="text" name="" id="">
+                <input class="input_editar" type="text" name="email_usuario" id="">
                 <button class="botao_editar" type="submit">Atualizar</button>
             </form>
         </main>

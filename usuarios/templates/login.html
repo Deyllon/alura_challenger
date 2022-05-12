@@ -2,6 +2,11 @@
 {% load static %}
 {% block content %}
     <h1 class="texto_cadastro">LOGIN DE USUARIO</h1>
+    {% for msg in messages %}
+        <div class="mensagem">
+            {{msg}}
+        </div>
+    {% endfor %}
     <form class="formulario_cadastro" action="{% url 'login' %}" method="POST">{% csrf_token %}
         <label class="label_cadastro" for="email">Email</label>
         <input class="input_cadastro" type="text" name="email" id="email">
