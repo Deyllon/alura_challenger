@@ -22,7 +22,7 @@ def index(request):
                 
             return redirect("index")
         
-        if arquivos != None:
+        if arquivos.count() > 0:
             horarios = formatar_horarios(arquivos)
             datas_transacoes = formatar_data(arquivos)
         
