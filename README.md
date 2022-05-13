@@ -1,7 +1,4 @@
 <h1 align="center"> Analisador de Transações </h1>
-<h1> 
-<img src="imagens\Captura de tela 2022-05-12 163730.png">
-</h1> 
 
 ## 📋SOBRE
 

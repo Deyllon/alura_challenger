@@ -1,0 +1,35 @@
+.texto_cadastro{
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: bold;
+}
+.formulario_cadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 0 25%;
+}
+.label_cadastro{
+    font-weight: bold;
+}
+.input_cadastro{
+    margin: 0.5rem 0;
+}
+.cadastrar{
+    text-decoration: none;
+    font-size: 1.5rem;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+    padding: 0.5rem;
+}
+.div_cadastro{
+    text-align: center;
+    margin: 1rem 0;
+}
+.mensagem{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

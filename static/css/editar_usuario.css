@@ -1,0 +1,28 @@
+.formulario_grid{
+    margin: 0 25%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.label_editar{
+    margin: 1rem 0;
+}
+.dados_editar{
+    margin: 0.5rem 0;
+}
+
+.input_editar{
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+}
+
+.botao_editar{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    color: white;
+    background-color: #0000FF;
+    border: 0px solid;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+}
