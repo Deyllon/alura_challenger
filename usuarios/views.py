@@ -40,7 +40,11 @@ def login(request):
     if request.method == "POST":
         email = request.POST["email"]
         senha = request.POST["senha"]
+        if not User.objects.filter(email=email).exists():
+            messages.error(request," Email não existe")
+            return redirect ("login")
         usuario = get_object_or_404(Usuarios, email=email)
+        
         if usuario.desativado == True:
             
             messages.error(request," Usuario desativado")
@@ -49,6 +53,9 @@ def login(request):
         
         login = auth.authenticate(request, username= username, password=senha)
         
+        if login is None:
+            messages.error(request, "Email ou senha errada")
+            return redirect ("login")
         auth.login(request, login)
         
         return redirect('usuarios_cadastrados')
