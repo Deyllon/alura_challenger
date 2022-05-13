@@ -113,7 +113,7 @@ def pegar_arquivo():
     if Arquivo.objects.exists():
         arquivos = Arquivo.objects.all()
         return arquivos
-        
+    return None
     
 def pegar_detalhe_arquivo(pk):
     
