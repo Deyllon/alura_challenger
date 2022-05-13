@@ -11,6 +11,7 @@ def index(request):
     if request.user.is_authenticated:
     
         arquivos = pegar_arquivo() 
+        print(arquivos)
         if request.method == "POST":
             
             arquivo = request.FILES['file']
@@ -33,8 +34,8 @@ def index(request):
             }   
             
             return render(request,"form.html", contexto)
-        
-        return render(request,"form.html")
+        else:
+            return render(request,"form.html")
     
     return redirect("login")
 
