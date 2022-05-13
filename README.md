@@ -14,5 +14,3 @@ O projeto foi construido utilizando as seguintes tecnologias:
 - JavaScript
 - Ajax
 
-## Clique no link para acessar o projeto
-
