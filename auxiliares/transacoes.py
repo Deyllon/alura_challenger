@@ -109,12 +109,14 @@ def ler_arquivo_e_salvar_transacao(arquivo,request):
     salvar_transacao(linhas, data_primeira_linha,request,arquivo)
     
 def pegar_arquivo():
-       
-    arquivos = Arquivo.objects.count()
     
-    if arquivos > 0:
-        arquivos = Arquivo.objects.all()
-        return arquivos
+    if Arquivo.objects.exists():
+        arquivos = Arquivo.objects.count()
+        
+        if arquivos > 0:
+            arquivos = Arquivo.objects.all()
+            return arquivos
+        return None
     return None
     
 def pegar_detalhe_arquivo(pk):
