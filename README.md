@@ -13,7 +13,3 @@ O projeto foi construido utilizando as seguintes tecnologias:
 - HTML e CSS
 - JavaScript
 - Ajax
-
-## 🖱️ Clique no link para acessar o projeto
-
-- https://transacao-challenges.herokuapp.com/
