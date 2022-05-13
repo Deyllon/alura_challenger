@@ -11,7 +11,6 @@ def index(request):
     if request.user.is_authenticated:
     
         arquivos = pegar_arquivo() 
-        print(arquivos)
         if request.method == "POST":
             
             arquivo = request.FILES['file']
